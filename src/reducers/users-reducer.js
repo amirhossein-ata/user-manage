@@ -37,7 +37,7 @@ export const usersReducer = (state = initialState, action) => {
                     usersList:usersList
             }
         case actionTypes.UPDATE_USER_SUCCESS:
-            let usersList = state.usersList.map((user) => {
+            usersList = state.usersList.map((user) => {
                 if (user.id === action.credentials.id){
                     return {
                         ...user,
@@ -51,7 +51,19 @@ export const usersReducer = (state = initialState, action) => {
                 ...state,
                     usersList:usersList
             }
-
+        
+        case actionTypes.ADD_USER_SUCCESS:
+            const id = state.usersList.length + 1
+            const user = {
+                id: id,
+                first_name: action.credentials.first_name,
+                last_name: action.credentials.last_name 
+            }
+            usersList = [...state.usersList,user]
+            return {
+                ...state,
+                usersList: usersList
+            }
         default: return state
             
     }

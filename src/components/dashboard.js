@@ -1,18 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {List, Button, Grid, Image, Header, Message, Modal} from 'semantic-ui-react'
-import {get_single_user, get_users_list, deleteUser, updateUser} from '../actions/users-actions'
+import {List, Button, Grid, Image, Header, Message, Pagination, Divider} from 'semantic-ui-react'
+import {get_single_user, get_users_list, deleteUser, updateUser, addUser} from '../actions/users-actions'
 import ProfileModal from './userProfileModal'
 import DeleteModal from './deleteUserModal'
-
+import AddModal from './addUserModal'
 class Dashboard extends React.Component{
     
     state = {
+        credentials:{
+            first_name:'',
+            last_name:''
+        },
         page: 1,
         fetchError: false,
         profileModalOpen: false,
         deleteModalOpen: false,
         editModalOpen: false,
+        addModalOpen: false,
         user: ''
     }
     componentDidMount(){
@@ -26,10 +31,13 @@ class Dashboard extends React.Component{
     handleClose = (type) => {
         switch (type) {
             case 'profile':
-                this.setState(() => ({profileModalOpen:false}))
+                this.setState(() => ({profileModalOpen: false}))
                 break;
             case 'delete':
-                this.setState(() => ({deleteModalOpen:false}))
+                this.setState(() => ({deleteModalOpen: false}))
+                break
+            case 'add':
+                this.setState(() => ({addModalOpen: false}))
                 break
             default:
                 break;
@@ -48,16 +56,31 @@ class Dashboard extends React.Component{
         this.setState(() => ({user: user , deleteModalOpen:true}))
     }
 
+    onShowAddModal = () => {
+        this.setState(() => ({addModalOpen: true}))
+    }
+    handleInpuChange= (inputName, input) => {
+        let credentials = this.state.credentials;
+        credentials[inputName] = input
+        this.setState(() => ({credentials : credentials}))    
+    }
+    
+    onAddUser = () => {
+        this.props.addUser(this.state.credentials)
+    }
     onConfirmDelete = () => {
         this.props.deleteUser(this.state.user.id)    
     }
+
     render(){
+
+        const defaultPic = "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
         return(
             <Grid centered textAlign="right">
                 <ProfileModal 
                     profileModalOpen = {this.state.profileModalOpen}
                     handleClose = {() => this.handleClose('profile')}
-                    avatar = {this.state.user.avatar}
+                    avatar = {this.state.user.avatar ? this.state.user.avatar : defaultPic}
                     firstName = {this.state.user.first_name}
                     lastName = {this.state.user.last_name}
                 />
@@ -65,6 +88,12 @@ class Dashboard extends React.Component{
                     deleteModalOpen = {this.state.deleteModalOpen}
                     handleClose = {() => this.handleClose('delete')}
                     onDelete = {this.onConfirmDelete}
+                />
+                <AddModal 
+                    addModalOpen = {this.state.addModalOpen}
+                    handleClose = {() => this.handleClose('add')}
+                    onSubmit = {this.onAddUser}
+                    onChange = {this.handleInpuChange}
                 />
                 <Grid.Row>
                     <Grid.Column width="10">    
@@ -81,41 +110,53 @@ class Dashboard extends React.Component{
                             مشکلی در گرفتن کاربران پیش آمده است.
                         </Message>
                     ): (
-                        <List divided verticalAlign='middle'>
-                        {this.props.usersList.map((user) => (
-                            <List.Item>
-                                    <List.Content floated='right'>
-                                        <Button
-                                            onClick = {() => this.onShowDeleteModal(user.id)}    
-                                            basic 
-                                            color='red' 
-                                            content='Red'
-                                        >
-                                            حذف
-                                        </Button>
-                                        <Button
-                                            basic 
-                                            color='orange' 
-                                            content='orange'
-                                        >
-                                            ایجاد تغییر
-                                        </Button>
-                                        <Button
-                                            onClick = {() => this.onShowProfileClick(user.id)}    
-                                            basic 
-                                            color='blue' 
-                                            content='blue'
-                                        >
-                                        مشاهده‌ی پروفایل
-                                    </Button>  
-                                    </List.Content>
-                                        <Image avatar src={user.avatar} />
-                                    <List.Content>{user.first_name} {user.last_name}</List.Content>
-                            </List.Item>                        
-                        ))}
-                            
-                        </List>
-            
+                        <div>
+                        
+                            <List divided verticalAlign='middle'>
+                                {this.props.usersList.map((user) => (
+                                    <List.Item>
+                                            <List.Content floated='right'>
+                                                <Button
+                                                    onClick = {() => this.onShowDeleteModal(user.id)}    
+                                                    basic 
+                                                    color='red' 
+                                                    content='Red'
+                                                >
+                                                    حذف
+                                                </Button>
+                                                <Button
+                                                    basic 
+                                                    color='orange' 
+                                                    content='orange'
+                                                >
+                                                    ایجاد تغییر
+                                                </Button>
+                                                <Button
+                                                    onClick = {() => this.onShowProfileClick(user.id)}    
+                                                    basic 
+                                                    color='blue' 
+                                                    content='blue'
+                                                >
+                                                مشاهده‌ی پروفایل
+                                            </Button>  
+                                            </List.Content>
+                                                <Image avatar src={user.avatar ? user.avatar : defaultPic} />
+                                            <List.Content>{user.first_name} {user.last_name}</List.Content>
+                                    </List.Item>                        
+                                ))}
+                                
+                            </List>
+                            <Divider hidden section/>
+                            <Grid centered>
+                                <Button 
+                                    onClick = {this.onShowAddModal}
+                                    color = "green"
+                                >
+                                    اضافه کردن کاربر
+                                </Button>                        
+                            </Grid>
+
+                        </div>
                     )}
                 </Grid.Column>
             </Grid>
@@ -135,7 +176,8 @@ const mapDispatchToProps = (dispatch) => {
         getUsersList : (page, callback) => dispatch(get_users_list(page, callback)),
         getSingleUser: (userId, callback) => dispatch(get_single_user(userId, callback)),
         deleteUser: (userId) => dispatch(deleteUser(userId)),
-        updateUser: (credentials) => dispatch(updateUser(credentials))
+        updateUser: (credentials) => dispatch(updateUser(credentials)),
+        addUser: (credentials) => dispatch(addUser(credentials))
     }
 }
 

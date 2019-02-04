@@ -7,6 +7,7 @@ export const actionTypes = {
     GET_USERS_LIST_FAILURE: 'GET_USERS_LIST_FAILURE',
     DELETE_USER_SUCCESS: 'DELETE_USER_SUCCESS',
     UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS',
+    ADD_USER_SUCCESS: 'ADD_USER_SUCCESS'
 }
 
 const get_single_success = (user) => ({
@@ -66,5 +67,10 @@ export const deleteUser = (userId) => ({
 
 export const updateUser = (credentials) => ({
     type: actionTypes.UPDATE_USER_SUCCESS,
+    credentials: credentials
+})
+
+export const addUser = (credentials) => ({
+    type: actionTypes.ADD_USER_SUCCESS,
     credentials: credentials
 })
