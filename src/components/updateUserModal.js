@@ -1,12 +1,16 @@
 import React from 'react'
-import { Modal, Header, Button, Icon, Form} from 'semantic-ui-react'
+import { Modal, Header, Button, Form } from 'semantic-ui-react'
 
-class AddUserModal extends React.Component{
+class UpdateUserModal extends React.Component{
 
-    state={
-        credentials:{
-            first_name:'',
-            last_name:''
+    constructor(props){
+        super(props)
+        console.log(props)
+        this.state = {
+            credentials:{
+                first_name: '',
+                last_name: ''
+            }
         }
     }
 
@@ -22,13 +26,13 @@ class AddUserModal extends React.Component{
     render(){
         return(
             <Modal
-                open={this.props.addModalOpen}
+                open={this.props.updateModalOpen}
                 onClose={this.props.handleClose}
                 closeIcon
                 size = "tiny"
                 dimmer = "blurring"
             >
-                <Header icon="add user" />
+                <Header icon="edit" />
                 <Modal.Content >
                     <Form>
                         <Form.Group widths='equal'>
@@ -47,7 +51,6 @@ class AddUserModal extends React.Component{
                                 label='نام خانوادگی' 
                             />
                         </Form.Group>
-                
                     </Form>
                 </Modal.Content>
                 <Modal.Actions>
@@ -66,4 +69,4 @@ class AddUserModal extends React.Component{
 
 }
 
-export default AddUserModal;
+export default UpdateUserModal;

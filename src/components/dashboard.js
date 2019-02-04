@@ -5,6 +5,8 @@ import {get_single_user, get_users_list, deleteUser, updateUser, addUser} from '
 import ProfileModal from './userProfileModal'
 import DeleteModal from './deleteUserModal'
 import AddModal from './addUserModal'
+import UpdateModal from './updateUserModal'
+
 class Dashboard extends React.Component{
     
     state = {
@@ -16,7 +18,7 @@ class Dashboard extends React.Component{
         fetchError: false,
         profileModalOpen: false,
         deleteModalOpen: false,
-        editModalOpen: false,
+        updateModalOpen: false,
         addModalOpen: false,
         user: ''
     }
@@ -39,9 +41,14 @@ class Dashboard extends React.Component{
             case 'add':
                 this.setState(() => ({addModalOpen: false}))
                 break
+            case 'update':
+                this.setState(() => ({updateModalOpen: false}))
+                break
             default:
                 break;
         }
+        this.setState(() => ({user:''}))
+
     }
     
     onShowProfileClick = (id) => {
@@ -56,9 +63,16 @@ class Dashboard extends React.Component{
         this.setState(() => ({user: user , deleteModalOpen:true}))
     }
 
+    onShowUpdateModel = (id) => {
+        const index = this.props.usersList.findIndex(user => user.id === id)
+        const user = this.props.usersList[index]
+        this.setState(() => ({user: user , updateModalOpen:true}))
+    }
+
     onShowAddModal = () => {
         this.setState(() => ({addModalOpen: true}))
     }
+    
     handleInpuChange= (inputName, input) => {
         let credentials = this.state.credentials;
         credentials[inputName] = input
@@ -67,6 +81,14 @@ class Dashboard extends React.Component{
     
     onAddUser = () => {
         this.props.addUser(this.state.credentials)
+    }
+    onUpdate = () => {
+        const credentials = {
+            id: this.state.user.id,
+            first_name: this.state.credentials.first_name,
+            last_name: this.state.credentials.last_name
+        }
+        this.props.updateUser(credentials)
     }
     onConfirmDelete = () => {
         this.props.deleteUser(this.state.user.id)    
@@ -93,6 +115,12 @@ class Dashboard extends React.Component{
                     addModalOpen = {this.state.addModalOpen}
                     handleClose = {() => this.handleClose('add')}
                     onSubmit = {this.onAddUser}
+                    onChange = {this.handleInpuChange}
+                />
+                <UpdateModal
+                    updateModalOpen = {this.state.updateModalOpen}
+                    handleClose = {() => this.handleClose('update')}
+                    onSubmit = {this.onUpdate}
                     onChange = {this.handleInpuChange}
                 />
                 <Grid.Row>
@@ -125,6 +153,7 @@ class Dashboard extends React.Component{
                                                     حذف
                                                 </Button>
                                                 <Button
+                                                    onClick = {() => this.onShowUpdateModel(user.id)}
                                                     basic 
                                                     color='orange' 
                                                     content='orange'
