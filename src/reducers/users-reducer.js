@@ -8,6 +8,7 @@ const initialState = {
 }
 
 export const usersReducer = (state = initialState, action) => {
+    console.log(action)
     switch (action.type) {
         case actionTypes.GET_SIGNLE_USER_SUCCESS:
             return {
@@ -29,6 +30,28 @@ export const usersReducer = (state = initialState, action) => {
                 ...state,
                     fetchUsersListError:true
             }
+        case actionTypes.DELETE_USER_SUCCESS:
+            let usersList = state.usersList.filter((user) =>  user.id!== action.userId )
+            return {
+                ...state,
+                    usersList:usersList
+            }
+        case actionTypes.UPDATE_USER_SUCCESS:
+            let usersList = state.usersList.map((user) => {
+                if (user.id === action.credentials.id){
+                    return {
+                        ...user,
+                        ...action.credentials
+                    };
+                }else{
+                    return user
+                }
+            })
+            return {
+                ...state,
+                    usersList:usersList
+            }
+
         default: return state
             
     }

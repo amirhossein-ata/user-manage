@@ -1,15 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Button, Grid, Image, Header, Message, Modal} from 'semantic-ui-react'
-import {get_single_user, get_users_list} from '../actions/users-actions'
+import {get_single_user, get_users_list, deleteUser, updateUser} from '../actions/users-actions'
 import ProfileModal from './userProfileModal'
+import DeleteModal from './deleteUserModal'
 
 class Dashboard extends React.Component{
     
     state = {
-        page:1,
-        fetchError:false,
-        modalOpen:false,
+        page: 1,
+        fetchError: false,
+        profileModalOpen: false,
+        deleteModalOpen: false,
+        editModalOpen: false,
         user: ''
     }
     componentDidMount(){
@@ -20,26 +23,48 @@ class Dashboard extends React.Component{
         })
     }
 
-    handleClose = () => {
-        this.setState(() => ({modalOpen:false}))
+    handleClose = (type) => {
+        switch (type) {
+            case 'profile':
+                this.setState(() => ({profileModalOpen:false}))
+                break;
+            case 'delete':
+                this.setState(() => ({deleteModalOpen:false}))
+                break
+            default:
+                break;
+        }
     }
     
     onShowProfileClick = (id) => {
         const index = this.props.usersList.findIndex(user => user.id === id)
         const user = this.props.usersList[index]
-        this.setState(() => ({user: user , modalOpen:true}))
+        this.setState(() => ({user: user , profileModalOpen:true}))
+    }
 
+    onShowDeleteModal = (id) => {
+        const index = this.props.usersList.findIndex(user => user.id === id)
+        const user = this.props.usersList[index]
+        this.setState(() => ({user: user , deleteModalOpen:true}))
+    }
 
+    onConfirmDelete = () => {
+        this.props.deleteUser(this.state.user.id)    
     }
     render(){
         return(
             <Grid centered textAlign="right">
                 <ProfileModal 
-                    profileModalOpen = {this.state.modalOpen}
-                    handleClose = {this.handleClose}
+                    profileModalOpen = {this.state.profileModalOpen}
+                    handleClose = {() => this.handleClose('profile')}
                     avatar = {this.state.user.avatar}
                     firstName = {this.state.user.first_name}
                     lastName = {this.state.user.last_name}
+                />
+                <DeleteModal
+                    deleteModalOpen = {this.state.deleteModalOpen}
+                    handleClose = {() => this.handleClose('delete')}
+                    onDelete = {this.onConfirmDelete}
                 />
                 <Grid.Row>
                     <Grid.Column width="10">    
@@ -61,6 +86,7 @@ class Dashboard extends React.Component{
                             <List.Item>
                                     <List.Content floated='right'>
                                         <Button
+                                            onClick = {() => this.onShowDeleteModal(user.id)}    
                                             basic 
                                             color='red' 
                                             content='Red'
@@ -107,7 +133,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getUsersList : (page, callback) => dispatch(get_users_list(page, callback)),
-        getSingleUser: (userId, callback) => dispatch(get_single_user(userId, callback))
+        getSingleUser: (userId, callback) => dispatch(get_single_user(userId, callback)),
+        deleteUser: (userId) => dispatch(deleteUser(userId)),
+        updateUser: (credentials) => dispatch(updateUser(credentials))
     }
 }
 
