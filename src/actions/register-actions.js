@@ -18,7 +18,6 @@ const login_failure = () => ({
 export const login = (credentials, callback) => (dispatch) => {
     registerApi.login(credentials, (response, status1) => {
         if(status1){
-            console.log('response from login: ', response)
             localStorage.setItem('token', response.token)
             console.log('user logged in ', localStorage)
             dispatch(login_success())
@@ -42,7 +41,6 @@ const register_failure = () => ({
 export const register = (credentials, callback) => (dispatch) => {
     registerApi.register(credentials, (response, status1) => {
         if(status1){
-            console.log('response from register: ', register)
             localStorage.setItem('token', response.token)
             console.log('user registered ', localStorage)
             dispatch(register_success())

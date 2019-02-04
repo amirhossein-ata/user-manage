@@ -1,7 +1,7 @@
 import { publicApiRequest,privateApiRequest } from './api-service';
 
 export const register = (credentials, callback) => {
-    const url = '/register'
+    const url = 'register'
     const data = {
         email: credentials.email,
         password: credentials.password 
@@ -15,7 +15,7 @@ export const register = (credentials, callback) => {
 }
 
 export const login = (credentials, callback) => {
-    const url = '/login';
+    const url = 'login';
     const data = {
         email: credentials.email,
         password: credentials.password 
