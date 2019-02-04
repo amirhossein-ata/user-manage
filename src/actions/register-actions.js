@@ -1,5 +1,5 @@
 import * as registerApi from '../api/register-api'
-
+import history from '../history'
 export const actionTypes = {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     LOGIN_FAILURE: 'LOGIN_FAILURE',
@@ -20,6 +20,7 @@ export const login = (credentials, callback) => (dispatch) => {
         if(status1){
             localStorage.setItem('token', response.token)
             console.log('user logged in ', localStorage)
+            history.push('/dashboard')
             dispatch(login_success())
         }else{
             console.log('loggin failed')
@@ -44,6 +45,8 @@ export const register = (credentials, callback) => (dispatch) => {
             localStorage.setItem('token', response.token)
             console.log('user registered ', localStorage)
             dispatch(register_success())
+            history.push('/dashboard')
+
         }else{
             console.log('register failed')
             dispatch(register_failure())
