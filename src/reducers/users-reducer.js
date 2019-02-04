@@ -10,24 +10,22 @@ const initialState = {
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_SIGNLE_USER_SUCCESS:
-            return{
+            return {
                 ...state,
                     user:action.user
             }
-        
         case actionTypes.GET_SINGLE_USER_FAILURE:
-            return{
+            return {
                 ...state,
                     fetchUserError:true
             }
-
         case actionTypes.GET_USERS_LIST_SUCCESS:
-            return{
+            return {
                 ...state,
                     usersList:action.users
             }
         case actionTypes.GET_USERS_LIST_FAILURE:
-            return{
+            return {
                 ...state,
                     fetchUsersListError:true
             }

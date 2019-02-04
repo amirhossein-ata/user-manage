@@ -51,5 +51,8 @@ export const get_users_list = (page, callback) => (dispatch) => {
             console.log('error in users list api')
             dispatch(get_users_list_failure())
         }
-    } )
+
+        callback(response, status1)
+    })
+
 }
