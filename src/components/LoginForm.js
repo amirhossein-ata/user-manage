@@ -1,5 +1,6 @@
 import React from 'react'
 import {login} from '../actions/register-actions'
+import { get_users_list } from '../actions/users-actions'
 import {connect} from 'react-redux'
 import {Grid, Header} from 'semantic-ui-react'
 import RawForm from './form'
@@ -35,7 +36,9 @@ class Login extends React.Component{
     }
 
     onLoginSuccess = () => {
+
         this.setState(() => ({loginSuccess: true, loginError: false}))
+        this.props.getUsersList(this.state.page, (response, status) => {})
     }
     render(){
         
@@ -64,16 +67,11 @@ class Login extends React.Component{
         )
     }
 }
-const mapStateToProps = (state) => {
-    
-    return{
-        state:state
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return{
-        login : (credentials, callback) => dispatch(login(credentials, callback))
+        login : (credentials, callback) => dispatch(login(credentials, callback)),
+        getUsersList : (page, callback) => dispatch(get_users_list(page, callback)),
+
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Login)
+export default connect(undefined,mapDispatchToProps)(Login)

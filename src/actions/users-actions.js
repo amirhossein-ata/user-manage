@@ -35,7 +35,7 @@ export const get_single_user = (userId, callback) => (dispatch) => {
 
 }
 
-const get_users_list_success = (users) => ({
+export const get_users_list_success = (users) => ({
     type: actionTypes.GET_USERS_LIST_SUCCESS,
     users: users
 })

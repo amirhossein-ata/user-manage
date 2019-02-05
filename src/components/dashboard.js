@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Button, Grid, Image, Header, Message, Pagination, Divider} from 'semantic-ui-react'
-import {get_single_user, get_users_list, deleteUser, updateUser, addUser} from '../actions/users-actions'
+import {get_single_user, get_users_list, deleteUser, updateUser, addUser, get_users_list_success} from '../actions/users-actions'
 import ProfileModal from './userProfileModal'
 import DeleteModal from './deleteUserModal'
 import AddModal from './addUserModal'
@@ -15,7 +15,6 @@ class Dashboard extends React.Component{
             first_name:'',
             last_name:''
         },
-        page: 1,
         fetchError: false,
         profileModalOpen: false,
         deleteModalOpen: false,
@@ -24,13 +23,14 @@ class Dashboard extends React.Component{
         user: ''
     }
     componentDidMount(){
-        this.props.getUsersList(this.state.page, (response, status) => {
-            if(!status){
-                this.setState(() => ({fetchError: true}))
-            }
-        })
+       const users = JSON.parse(localStorage.getItem('users'))
+       this.props.loadUsersFromLocalStorage(users)
     }
 
+    componentDidUpdate(){
+        console.log(this.props.usersList)
+        localStorage.setItem('users',JSON.stringify(this.props.usersList))
+    }
     handleClose = (type) => {
         switch (type) {
             case 'profile':
@@ -208,7 +208,8 @@ const mapDispatchToProps = (dispatch) => {
         getSingleUser: (userId, callback) => dispatch(get_single_user(userId, callback)),
         deleteUser: (userId) => dispatch(deleteUser(userId)),
         updateUser: (credentials) => dispatch(updateUser(credentials)),
-        addUser: (credentials) => dispatch(addUser(credentials))
+        addUser: (credentials) => dispatch(addUser(credentials)),
+        loadUsersFromLocalStorage: (users) => dispatch(get_users_list_success(users))
     }
 }
 
