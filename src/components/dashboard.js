@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {List, Button, Grid, Image, Header, Message, Pagination, Divider} from 'semantic-ui-react'
+import {List, Button, Grid, Image, Header, Message, Divider} from 'semantic-ui-react'
 import {get_single_user, get_users_list, deleteUser, updateUser, addUser, get_users_list_success} from '../actions/users-actions'
 import ProfileModal from './userProfileModal'
 import DeleteModal from './deleteUserModal'
@@ -28,7 +28,6 @@ class Dashboard extends React.Component{
     }
 
     componentDidUpdate(){
-        console.log(this.props.usersList)
         localStorage.setItem('users',JSON.stringify(this.props.usersList))
     }
     handleClose = (type) => {
@@ -143,38 +142,47 @@ class Dashboard extends React.Component{
                         <div>
                         
                             <List divided verticalAlign='middle'>
-                                {this.props.usersList.map((user) => (
-                                    <List.Item>
-                                            <List.Content floated='right'>
-                                                <Button
-                                                    onClick = {() => this.onShowDeleteModal(user.id)}    
-                                                    basic 
-                                                    color='red' 
-                                                    content='Red'
-                                                >
-                                                    حذف
-                                                </Button>
-                                                <Button
-                                                    onClick = {() => this.onShowUpdateModel(user.id)}
-                                                    basic 
-                                                    color='orange' 
-                                                    content='orange'
-                                                >
-                                                    ایجاد تغییر
-                                                </Button>
-                                                <Button
-                                                    onClick = {() => this.onShowProfileClick(user.id)}    
-                                                    basic 
-                                                    color='blue' 
-                                                    content='blue'
-                                                >
-                                                مشاهده‌ی پروفایل
-                                            </Button>  
-                                            </List.Content>
-                                                <Image avatar src={user.avatar ? user.avatar : defaultPic} />
-                                            <List.Content>{user.first_name} {user.last_name}</List.Content>
-                                    </List.Item>                        
-                                ))}
+                                {this.props.usersList.length > 0 ? (
+                                    <div>
+                                        {this.props.usersList.map((user) => (
+                                            <List.Item>
+                                                    <List.Content floated='right'>
+                                                        <Button
+                                                            onClick = {() => this.onShowDeleteModal(user.id)}    
+                                                            basic 
+                                                            color='red' 
+                                                            content='Red'
+                                                        >
+                                                            حذف
+                                                        </Button>
+                                                        <Button
+                                                            onClick = {() => this.onShowUpdateModel(user.id)}
+                                                            basic 
+                                                            color='orange' 
+                                                            content='orange'
+                                                        >
+                                                            ایجاد تغییر
+                                                        </Button>
+                                                        <Button
+                                                            onClick = {() => this.onShowProfileClick(user.id)}    
+                                                            basic 
+                                                            color='blue' 
+                                                            content='blue'
+                                                        >
+                                                        مشاهده‌ی پروفایل
+                                                    </Button>  
+                                                    </List.Content>
+                                                        <Image avatar src={user.avatar ? user.avatar : defaultPic} />
+                                                    <List.Content>{user.first_name} {user.last_name}</List.Content>
+                                            </List.Item>                        
+                                        ))}
+                                    </div>):(
+                                        <Message info>
+                                            کاربری وجود ندارد
+                                        </Message>
+                                    )
+                                )}
+                                
                                 
                             </List>
                             <Divider hidden section/>
@@ -196,7 +204,6 @@ class Dashboard extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.usersReducer.usersList)
     return{
         usersList : state.usersReducer.usersList
     }

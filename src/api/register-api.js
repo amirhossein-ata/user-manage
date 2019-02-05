@@ -1,4 +1,4 @@
-import { publicApiRequest,privateApiRequest } from './api-service';
+import { publicApiRequest } from './api-service';
 
 export const register = (credentials, callback) => {
     const url = 'register'

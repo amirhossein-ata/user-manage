@@ -53,7 +53,7 @@ class RawForm extends React.Component {
                         </Form.Field>
                     {this.props.submitError && (
                         <Message negative>
-                            مشکلی در ورود شما پیش آمد.
+                            مشکلی پیش آمده است لطفا مجدد امتحان کنید.
                         </Message>
                     )}
                     <Button primary type='submit'>ورود</Button>

@@ -37,19 +37,20 @@ class UpdateUserModal extends React.Component{
                     <Form>
                         <Form.Group widths='equal'>
                             <Form.Input 
-                                name = "first_name" 
-                                value = {this.state.credentials.first_name}
-                                onChange = {this.handle_change} 
-                                fluid 
-                                label='نام' 
-                            />
-                            <Form.Input 
                                 name = "last_name"
                                 value = {this.state.credentials.last_name} 
                                 onChange = {this.handle_change} 
                                 fluid 
                                 label='نام خانوادگی' 
                             />
+                            <Form.Input 
+                                name = "first_name" 
+                                value = {this.state.credentials.first_name}
+                                onChange = {this.handle_change} 
+                                fluid 
+                                label='نام' 
+                            />
+                        
                         </Form.Group>
                     </Form>
                 </Modal.Content>

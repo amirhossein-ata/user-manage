@@ -2,8 +2,6 @@ const API_BASE_URL = 'https://reqres.in/api'
 
 export const  publicApiRequest = (endpoint, options, callback) => {
     const url = `${API_BASE_URL}/${endpoint}`;
-    console.log('url', url);
-    console.log('opt', options);
     fetch(url, {
         ...options,
         headers: {
@@ -48,9 +46,6 @@ export const  publicApiRequest = (endpoint, options, callback) => {
 
 export const privateApiRequest = (endpoint, options, token, callback) => {
     const url = `${API_BASE_URL}/${endpoint}`;
-    console.log('url', url);
-    console.log('opt', options);
-    console.log('opt', options.JSON);
     fetch(url, {
         ...options,
         headers: {

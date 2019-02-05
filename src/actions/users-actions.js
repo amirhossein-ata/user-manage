@@ -22,10 +22,8 @@ export const get_single_user = (userId, callback) => (dispatch) => {
     const token = localStorage.getItem('token')
     usersApi.getSingleUser(token, userId, (response, status1) => {
         if(status1){
-            console.log('response from get single user: ',response)
             dispatch(get_single_success(response.data))
         }else{
-            console.log('error in single user api')
             dispatch(get_single_failure())
         }
 
@@ -48,10 +46,8 @@ export const get_users_list = (page, callback) => (dispatch) => {
     const token = localStorage.getItem('token')
     usersApi.getUsersList(token, page, (response, status1) => {
         if(status1){
-            console.log('response from get users list: ',response)
             dispatch(get_users_list_success(response.data))
         }else{
-            console.log('error in users list api')
             dispatch(get_users_list_failure())
         }
 

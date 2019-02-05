@@ -20,11 +20,9 @@ export const login = (credentials, callback) => (dispatch) => {
     registerApi.login(credentials, (response, status1) => {
         if(status1){
             localStorage.setItem('token', response.token)
-            console.log('user logged in ', localStorage)
             history.push('/dashboard')
             dispatch(login_success())
         }else{
-            console.log('loggin failed')
             dispatch(login_failure())
         }
 
@@ -44,12 +42,10 @@ export const register = (credentials, callback) => (dispatch) => {
     registerApi.register(credentials, (response, status1) => {
         if(status1){
             localStorage.setItem('token', response.token)
-            console.log('user registered ', localStorage)
             dispatch(register_success())
             history.push('/dashboard')
 
         }else{
-            console.log('register failed')
             dispatch(register_failure())
         }
 

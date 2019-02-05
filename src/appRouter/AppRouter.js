@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {BrowserRouter, Router, Route, Link, Redirect, withRouter} from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 import FirstPage from '../components/firstPage'
 import Dashboard from '../components/dashboard'
 import history from '../history'
@@ -10,22 +10,15 @@ const PrivateRoute = ({component: Component, isAuthenticated, ...rest}) => (
         isAuthenticated === true ? <Component {...props} /> : <Redirect to='/' />
         
         )}
-    
     />
 )
 
-const LoginRoute = ({component: Component,isAuthenticated ,...rest}) => {
-
-    return(
+const LoginRoute = ({component: Component,isAuthenticated ,...rest}) => (
         <Route {...rest} render = {(props) => (
             isAuthenticated === true ? <Redirect to='/dashboard'/> : <Component {...props} /> 
-        )}
-        
-        
+            )}    
         />
-    
-    )
-}
+)
 class AppRouter extends React.Component{
     render(){
         return(
@@ -41,7 +34,6 @@ class AppRouter extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.registerReducer.loggedIn)
     return{
         isAuthenticated: state.registerReducer.loggedIn
     }

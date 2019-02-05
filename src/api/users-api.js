@@ -1,4 +1,4 @@
-import { publicApiRequest, privateApiRequest } from './api-service'
+import { privateApiRequest } from './api-service'
 
 export const getSingleUser = (token, userId, callback) => {
     const url = `users/${userId}`

@@ -24,11 +24,6 @@ class Navbar extends React.Component{
     }
 }
 
-const mapStateToProps = (state) => {
-    return{
-        register : state.registerReducer
-    }
-}
 
 const mapDispatchToProps = (dispatch) => {
     return{
@@ -36,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default connect(undefined, mapDispatchToProps)(Navbar)
