@@ -7,6 +7,7 @@ class Navbar extends React.Component{
 
     onLogout = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('users')
         this.props.logout()
     }
     render(){
