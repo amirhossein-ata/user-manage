@@ -42,7 +42,7 @@ class Login extends React.Component{
         return(
             <div>
                 <Grid centered >
-                    <Grid.Column computer={10} tablet={12}  mobile={14} textAlign="right">
+                    <Grid.Column computer={15} tablet={12}  mobile={14} textAlign="right">
                         <Header dividing>
                             فرم ورود
                         </Header>
