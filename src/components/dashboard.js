@@ -140,51 +140,50 @@ class Dashboard extends React.Component{
                         </Message>
                     ): (
                         <div>
-                        
-                            <List divided verticalAlign='middle'>
-                                {this.props.usersList.length > 0 ? (
-                                    <div>
-                                        {this.props.usersList.map((user) => (
-                                            <List.Item>
-                                                    <List.Content floated='right'>
-                                                        <Button
-                                                            onClick = {() => this.onShowDeleteModal(user.id)}    
-                                                            basic 
-                                                            color='red' 
-                                                            content='Red'
-                                                        >
-                                                            حذف
-                                                        </Button>
-                                                        <Button
-                                                            onClick = {() => this.onShowUpdateModel(user.id)}
-                                                            basic 
-                                                            color='orange' 
-                                                            content='orange'
-                                                        >
-                                                            ایجاد تغییر
-                                                        </Button>
-                                                        <Button
-                                                            onClick = {() => this.onShowProfileClick(user.id)}    
-                                                            basic 
-                                                            color='blue' 
-                                                            content='blue'
-                                                        >
-                                                        مشاهده‌ی پروفایل
-                                                    </Button>  
-                                                    </List.Content>
-                                                        <Image avatar src={user.avatar ? user.avatar : defaultPic} />
-                                                    <List.Content>{user.first_name} {user.last_name}</List.Content>
-                                            </List.Item>                        
-                                        ))}
-                                    </div>):(
-                                        <Message info>
-                                            کاربری وجود ندارد
-                                        </Message>
-                                    )
-                                )}
-                                
-                                
-                            </List>
+                            {this.props.usersList.length > 0 ? (
+                                    
+                                <List divided verticalAlign='middle'>
+                                    
+                                            {this.props.usersList.map((user) => (
+                                                <List.Item>
+                                                        <List.Content floated='right'>
+                                                            <Button
+                                                                onClick = {() => this.onShowDeleteModal(user.id)}    
+                                                                basic 
+                                                                color='red' 
+                                                                content='Red'
+                                                            >
+                                                                حذف
+                                                            </Button>
+                                                            <Button
+                                                                onClick = {() => this.onShowUpdateModel(user.id)}
+                                                                basic 
+                                                                color='orange' 
+                                                                content='orange'
+                                                            >
+                                                                ایجاد تغییر
+                                                            </Button>
+                                                            <Button
+                                                                onClick = {() => this.onShowProfileClick(user.id)}    
+                                                                basic 
+                                                                color='blue' 
+                                                                content='blue'
+                                                            >
+                                                            مشاهده‌ی پروفایل
+                                                        </Button>  
+                                                        </List.Content>
+                                                            <Image avatar src={user.avatar ? user.avatar : defaultPic} />
+                                                        <List.Content>{user.first_name} {user.last_name}</List.Content>
+                                                </List.Item>                        
+                                            ))}
+                                        
+                                    
+                                    
+                                </List>):(
+                                    <Message info>
+                                        کاربری وجود ندارد
+                                    </Message>
+                            )}
                             <Divider hidden section/>
                             <Grid centered>
                                 <Button 
