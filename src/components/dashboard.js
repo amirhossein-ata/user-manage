@@ -23,8 +23,13 @@ class Dashboard extends React.Component{
         user: ''
     }
     componentDidMount(){
-       const users = JSON.parse(localStorage.getItem('users'))
-       this.props.loadUsersFromLocalStorage(users)
+        if(localStorage.length > 1 ){
+            const users = JSON.parse(localStorage.getItem('users'))
+            this.props.loadUsersFromLocalStorage(users)    
+        }else{
+            this.props.getUsersList(this.state.page, (response, status) => {})
+
+        }
     }
 
     componentDidUpdate(){
