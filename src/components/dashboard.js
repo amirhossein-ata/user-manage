@@ -6,6 +6,7 @@ import ProfileModal from './userProfileModal'
 import DeleteModal from './deleteUserModal'
 import AddModal from './addUserModal'
 import UpdateModal from './updateUserModal'
+import Navbar from './Navbar'
 
 class Dashboard extends React.Component{
     
@@ -99,6 +100,7 @@ class Dashboard extends React.Component{
         const defaultPic = "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
         return(
             <Grid centered textAlign="right">
+                <Navbar />
                 <ProfileModal 
                     profileModalOpen = {this.state.profileModalOpen}
                     handleClose = {() => this.handleClose('profile')}

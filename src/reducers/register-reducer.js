@@ -30,6 +30,11 @@ export const registerReducer = (state = initialState, action) => {
                 loggedIn:false,
                 registerError:true
             }
+        case actionTypes.LOGOUT:
+            return {
+                ...state,
+                    loggedIn:false
+            }
         default : return state
     }
 

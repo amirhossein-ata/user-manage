@@ -4,7 +4,8 @@ export const actionTypes = {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     LOGIN_FAILURE: 'LOGIN_FAILURE',
     REGISTER_SUCCESS: 'REGISTER_SUCCESS',
-    REGISTER_FAILURE: 'REGISTER_FAILURE'
+    REGISTER_FAILURE: 'REGISTER_FAILURE',
+    LOGOUT: 'LOGOUT'
 }
 
 const login_success = () => ({
@@ -55,3 +56,7 @@ export const register = (credentials, callback) => (dispatch) => {
         callback(response, status1)
     })
 }
+
+export const logout = () => ({
+    type: actionTypes.LOGOUT
+})
