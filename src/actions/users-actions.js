@@ -10,14 +10,15 @@ export const actionTypes = {
     ADD_USER_SUCCESS: 'ADD_USER_SUCCESS'
 }
 
-const get_single_success = (user) => ({
+export const get_single_success = (user) => ({
     type: actionTypes.GET_SIGNLE_USER_SUCCESS,
     user:user
 })
 
-const get_single_failure = () => ({
+export const get_single_failure = () => ({
     type: actionTypes.GET_SINGLE_USER_FAILURE
 })
+
 export const get_single_user = (userId, callback) => (dispatch) => {
     const token = localStorage.getItem('token')
     usersApi.getSingleUser(token, userId, (response, status1) => {
@@ -38,7 +39,7 @@ export const get_users_list_success = (users) => ({
     users: users
 })
 
-const get_users_list_failure = () => ({
+export const get_users_list_failure = () => ({
     type: actionTypes.GET_USERS_LIST_FAILURE
 })
 

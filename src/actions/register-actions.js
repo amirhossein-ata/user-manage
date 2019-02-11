@@ -8,11 +8,11 @@ export const actionTypes = {
     LOGOUT: 'LOGOUT'
 }
 
-const login_success = () => ({
+export const login_success = () => ({
     type: actionTypes.LOGIN_SUCCESS
 })
 
-const login_failure = () => ({
+export const login_failure = () => ({
     type: actionTypes.LOGIN_FAILURE
 })
 
@@ -30,11 +30,11 @@ export const login = (credentials, callback) => (dispatch) => {
     })
 }
 
-const register_success = () => ({
+export const register_success = () => ({
     type: actionTypes.REGISTER_SUCCESS
 })
 
-const register_failure = () => ({
+export const register_failure = () => ({
     type: actionTypes.REGISTER_FAILURE
 })
 
