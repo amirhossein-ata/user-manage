@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export const usersReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
         case actionTypes.GET_SIGNLE_USER_SUCCESS:
             return {
@@ -37,7 +36,7 @@ export const usersReducer = (state = initialState, action) => {
                     usersList:usersList
             }
         case actionTypes.UPDATE_USER_SUCCESS:
-            usersList = state.usersList.map((user) => {
+            let users = state.usersList.map((user) => {
                 if (user.id === action.credentials.id){
                     return {
                         ...user,
@@ -49,7 +48,7 @@ export const usersReducer = (state = initialState, action) => {
             })
             return {
                 ...state,
-                    usersList:usersList
+                    usersList:users
             }
         
         case actionTypes.ADD_USER_SUCCESS:
@@ -59,10 +58,10 @@ export const usersReducer = (state = initialState, action) => {
                 first_name: action.credentials.first_name,
                 last_name: action.credentials.last_name 
             }
-            usersList = [...state.usersList,user]
+            let add_result_users = [...state.usersList,user]
             return {
                 ...state,
-                usersList: usersList
+                usersList: add_result_users
             }
         default: return state
             
