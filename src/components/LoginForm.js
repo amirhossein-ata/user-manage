@@ -38,7 +38,7 @@ class Login extends React.Component{
     onLoginSuccess = () => {
 
         this.setState(() => ({loginSuccess: true, loginError: false}))
-        this.props.getUsersList(this.state.page, (response, status) => {})
+     
     }
     render(){
         
@@ -69,8 +69,8 @@ class Login extends React.Component{
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        login : (credentials, callback) => dispatch(login(credentials, callback)),
-        getUsersList : (page, callback) => dispatch(get_users_list(page, callback)),
+        login : (credentials, callback) => dispatch({type:"LOGIN_REQUEST",credentials:credentials,callback:callback}),
+        getUsersList : (callback) => dispatch({type:"GET_USERS_LIST",callback:callback}),
 
     }
 }

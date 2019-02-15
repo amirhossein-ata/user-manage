@@ -14,7 +14,7 @@ export const register = (credentials, callback) => {
     publicApiRequest(url, options, callback)
 }
 
-export const login = (credentials, callback) => {
+export const login = (credentials) => {
     const url = 'login';
     const data = {
         email: credentials.email,
@@ -25,6 +25,6 @@ export const login = (credentials, callback) => {
         body: JSON.stringify(data)
     };
    
-    publicApiRequest(url, options, callback);
+    publicApiRequest(url, options,()=>{});
 }
 

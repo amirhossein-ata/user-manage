@@ -8,33 +8,20 @@ export const actionTypes = {
     LOGOUT: 'LOGOUT'
 }
 
-const login_success = () => ({
+export const login_success = () => ({
     type: actionTypes.LOGIN_SUCCESS
 })
 
-const login_failure = () => ({
+export const login_failure = () => ({
     type: actionTypes.LOGIN_FAILURE
 })
 
-export const login = (credentials, callback) => (dispatch) => {
-    registerApi.login(credentials, (response, status1) => {
-        if(status1){
-            localStorage.setItem('token', response.token)
-            history.push('/dashboard')
-            dispatch(login_success())
-        }else{
-            dispatch(login_failure())
-        }
 
-        callback(response, status1)
-    })
-}
-
-const register_success = () => ({
+export const register_success = () => ({
     type: actionTypes.REGISTER_SUCCESS
 })
 
-const register_failure = () => ({
+export const register_failure = () => ({
     type: actionTypes.REGISTER_FAILURE
 })
 

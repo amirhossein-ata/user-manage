@@ -1,10 +1,8 @@
 import React from 'react'
 import {register} from '../actions/register-actions'
-import { get_users_list } from '../actions/users-actions'
 import {connect} from 'react-redux'
 import {Grid, Header} from 'semantic-ui-react'
 import RawForm from './form'
-
 class Register extends React.Component{
     state={
         credentials:{
@@ -71,7 +69,7 @@ class Register extends React.Component{
 const mapDispatchToProps = (dispatch) => {
     return{
         register : (credentials, callback) => dispatch(register(credentials, callback)),
-        getUsersList : (page, callback) => dispatch(get_users_list(page, callback)),
+        getUsersList : (callback) => dispatch({type:"GET_USERS_LIST",callback:callback}),
     }
 }
 export default connect(undefined,mapDispatchToProps)(Register)

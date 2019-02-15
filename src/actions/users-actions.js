@@ -42,19 +42,6 @@ const get_users_list_failure = () => ({
     type: actionTypes.GET_USERS_LIST_FAILURE
 })
 
-export const get_users_list = (page, callback) => (dispatch) => {
-    const token = localStorage.getItem('token')
-    usersApi.getUsersList(token, page, (response, status1) => {
-        if(status1){
-            dispatch(get_users_list_success(response.data))
-        }else{
-            dispatch(get_users_list_failure())
-        }
-
-        callback(response, status1)
-    })
-
-}
 
 export const deleteUser = (userId) => ({
     type: actionTypes.DELETE_USER_SUCCESS,
