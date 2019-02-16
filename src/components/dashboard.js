@@ -22,19 +22,7 @@ class Dashboard extends React.Component{
         addModalOpen: false,
         user: ''
     }
-    componentDidMount(){
-        if(localStorage.length > 1 ){
-            this.props.getUsersList((response, status) => {
-                console.log(response)
-            })
-
-        }else{
-            this.props.getUsersList((response, status) => {
-                console.log(response)
-            })
-
-        }
-    }
+    
 
     // componentDidUpdate(){
     //     localStorage.setItem('users',JSON.stringify(this.props.usersList))
