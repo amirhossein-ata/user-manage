@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
-import * as registerApi from '../api/register-api'
+import { request } from '../api/api-service'
 import { actionTypes } from '../actions/register-actions'
 
 
@@ -22,7 +22,7 @@ const loginRequest = (credentials,callback) =>{
 
 function* login({credentials, callback}){
     try {
-        yield call(loginRequest,credentials,callback)
+        yield call(request,'https://reqres.in/api/login',{method:'POST', payload:{email:credentials.email,password:credentials.password}},callback)
         
         yield put({type: actionTypes.LOGIN_SUCCESS})    
     }
