@@ -24,9 +24,6 @@ class Dashboard extends React.Component{
     }
     componentDidMount(){
         if(localStorage.length > 1 ){
-            // const users = JSON.parse(localStorage.getItem('users'))
-            // this.props.loadUsersFromLocalStorage(users)    
-        
             this.props.getUsersList((response, status) => {
                 console.log(response)
             })
@@ -39,9 +36,9 @@ class Dashboard extends React.Component{
         }
     }
 
-    componentDidUpdate(){
-        localStorage.setItem('users',JSON.stringify(this.props.usersList))
-    }
+    // componentDidUpdate(){
+    //     localStorage.setItem('users',JSON.stringify(this.props.usersList))
+    // }
     handleClose = (type) => {
         switch (type) {
             case 'profile':
