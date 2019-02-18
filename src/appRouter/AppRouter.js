@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { Router, Route, Redirect } from 'react-router-dom';
 import FirstPage from '../components/firstPage'
 import Dashboard from '../components/dashboard'
+import Stats from '../components/Stats'
 import history from '../history'
 
 const PrivateRoute = ({component: Component, isAuthenticated, ...rest}) => (
@@ -24,6 +25,7 @@ class AppRouter extends React.Component{
         return(
             <Router history={history}>
                 <div>
+                    <Route path="/stats" component={Stats}/>
                     <LoginRoute path="/" isAuthenticated={this.props.isAuthenticated} component={FirstPage} exact={true}/>
                     <PrivateRoute isAuthenticated={this.props.isAuthenticated} path="/dashboard" component={Dashboard} />
                 </div>

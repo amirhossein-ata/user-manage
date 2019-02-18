@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Button, Grid, Image, Header, Message, Divider} from 'semantic-ui-react'
-import {get_single_user,deleteUser, updateUser, addUser, get_users_list_success} from '../actions/users-actions'
+import {deleteUser, updateUser, addUser} from '../actions/users-actions'
 import ProfileModal from './userProfileModal'
 import DeleteModal from './deleteUserModal'
 import AddModal from './addUserModal'
@@ -207,12 +207,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        getUsersList : (callback) => dispatch({type:"GET_USERS_LIST",callback:callback}),
-        getSingleUser: (userId, callback) => dispatch(get_single_user(userId, callback)),
         deleteUser: (userId) => dispatch(deleteUser(userId)),
         updateUser: (credentials) => dispatch(updateUser(credentials)),
         addUser: (credentials) => dispatch(addUser(credentials)),
-        loadUsersFromLocalStorage: (users) => dispatch(get_users_list_success(users))
+ 
     }
 }
 
