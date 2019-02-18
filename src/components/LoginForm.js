@@ -2,7 +2,7 @@ import React from 'react'
 import {login} from '../actions/register-actions'
 import { get_users_list } from '../actions/users-actions'
 import {connect} from 'react-redux'
-import {Grid, Header} from 'semantic-ui-react'
+import { Row, Col} from 'antd'
 import RawForm from './form'
 
 class Login extends React.Component{
@@ -36,7 +36,9 @@ class Login extends React.Component{
     }
 
     onLoginSuccess = () => {
-
+        this.props.getUsersList((response, status) => {
+            console.log(response)
+        })
         this.setState(() => ({loginSuccess: true, loginError: false}))
      
     }
@@ -44,11 +46,11 @@ class Login extends React.Component{
         
         return(
             <div>
-                <Grid centered >
-                    <Grid.Column computer={15} tablet={12}  mobile={14} textAlign="right">
-                        <Header dividing>
+                <Row>
+                    <Col span="12" offset="6" >
+                        <h3 style={{float:'right'}}>
                             فرم ورود
-                        </Header>
+                        </h3>
 
                         <RawForm 
                             onSubmit = {this.onSubmit}
@@ -60,8 +62,8 @@ class Login extends React.Component{
                             submitSuccess = {this.state.loginSuccess}
                             onChange = {this.handle_change}
                         />               
-                    </Grid.Column>    
-                </Grid>
+                    </Col>    
+                </Row>
             </div>
             
         )

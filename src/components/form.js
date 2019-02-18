@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Message, Form } from 'semantic-ui-react'
-
+import {Form, Icon, Input, Button} from 'antd';
 
 class RawForm extends React.Component {
     constructor(props){
@@ -28,36 +27,41 @@ class RawForm extends React.Component {
     
 
     render(){
+      
         return(
             <div>
-                <Form onSubmit={this.onSubmit} >
-                        <Form.Field>
-                            <Form.Input
-                                fluid
-                                label="ایمیل"
+                 <Form  onSubmit={this.onSubmit}>
+                    <Form.Item>
+                            <Input 
+                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                                placeholder="Username" 
                                 name="email"
                                 value={this.state.credentials.email}
-                                onChange={this.handle_change}                                
+                                onChange={this.handle_change}   
                             />
-                        </Form.Field>
+                    </Form.Item>
+                    <Form.Item>
+                        <Input 
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                            type="password" 
+                            placeholder="Password" 
+                            name="password"
+                            value={this.state.credentials.password}
+                            onChange={this.handle_change}
+                    
+                        />
                         
-                        <Form.Field>
-                            <Form.Input
-                                fluid
-                                label="رمز عبور"
-                                name="password"
-                                type='password'
-                                value={this.state.credentials.password}
-                                onChange={this.handle_change}
-                            />                 
-                        </Form.Field>
-                    {this.props.submitError && (
-                        <Message negative>
-                            مشکلی پیش آمده است لطفا مجدد امتحان کنید.
-                        </Message>
-                    )}
-                    <Button primary type='submit'>ورود</Button>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            Log in
+                        </Button>
+                    </Form.Item>
                 </Form>
+                
             </div>
         )
     }

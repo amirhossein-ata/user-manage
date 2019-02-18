@@ -8,14 +8,6 @@ export const actionTypes = {
     LOGOUT: 'LOGOUT'
 }
 
-export const login_success = () => ({
-    type: actionTypes.LOGIN_SUCCESS
-})
-
-export const login_failure = () => ({
-    type: actionTypes.LOGIN_FAILURE
-})
-
 
 export const register_success = () => ({
     type: actionTypes.REGISTER_SUCCESS
