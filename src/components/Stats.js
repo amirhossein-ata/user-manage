@@ -9,7 +9,12 @@ import '../styles/stats.css'
 
 export default class Stats extends React.Component{
     state = {
-        chartWidth : 500
+        chartWidth : 500,
+        selectedWord:''
+    }
+    wordSelect = (word) => {
+        console.log(word)
+        this.setState(() => ({selectedWord: word}))
     }
     refCallback = element => {
         if (element) {
@@ -76,8 +81,7 @@ export default class Stats extends React.Component{
             {
               name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
             },
-          ];
-          
+          ]; 
         const progresses = [
             {
                 image: imageSample,
@@ -135,7 +139,10 @@ export default class Stats extends React.Component{
                         <Col  span={1}></Col>
                         
                         <Col className = "coloumn"xs={18} sm={18} md={6} lg={9} xl={9} >
-                            <TagCloud data={TagCloudData}/>
+                            <TagCloud 
+                                data={TagCloudData}
+                                onWordSelect = {(word) => this.wordSelect(word)}
+                            />
                         </Col>
                     </Row>
                     <br></br>

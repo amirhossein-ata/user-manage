@@ -7,9 +7,12 @@ export default class Tagcloud extends React.Component {
     state = {
         tag: undefined
     }
+    shouldComponentUpdate(nextProps, nextState){
+        return false
+     }
     onClick = (tag) => {
-        this.setState(() => ({tag}))
-     } 
+        this.props.onWordSelect(tag.value)
+    } 
 
     render(){
         const options = {

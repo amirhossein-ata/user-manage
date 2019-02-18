@@ -1,7 +1,11 @@
 import { actionTypes } from '../actions/register-actions'
 
+
+let auth = JSON.parse(localStorage.getItem('persist:buzz')).auth;
+auth = JSON.parse(auth);
+    
 const initialState = {
-    loggedIn: !!localStorage.getItem("token"),
+    loggedIn: !!auth.isAuthenticated,
     registerError: '',
     loginError: ''
 }

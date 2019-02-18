@@ -22,7 +22,7 @@ const loginRequest = (credentials,callback) =>{
 
 function* login({credentials, callback}){
     try {
-        yield call(request,'https://reqres.in/api/login',{method:'POST', payload:{email:credentials.email,password:credentials.password}},callback)
+        yield call(loginRequest,{email:credentials.email,password:credentials.password},callback)
         
         yield put({type: actionTypes.LOGIN_SUCCESS})    
     }
