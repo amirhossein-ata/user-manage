@@ -4,6 +4,7 @@ import { Row, Col} from 'antd'
 import Chart from './Charts/Chart'
 import Progress from './Charts/progress'
 import TagCloud from './Charts/TagCloud'
+import Heatmap from './Charts/Heatmap'
 
 import '../styles/stats.css'
 
@@ -154,6 +155,14 @@ export default class Stats extends React.Component{
                                 color = "#992CA0" 
                                 data = {lineChartsData}
                             />
+                        </Col>
+                    </Row>
+
+                    <br></br>
+
+                    <Row type="flex" justify="center" align="middle">
+                        <Col xs={18} sm={18} md={14} lg={14} xl={14}>
+                            <Heatmap />
                         </Col>
                     </Row>
                 </Col>
