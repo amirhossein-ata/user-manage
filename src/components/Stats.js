@@ -20,7 +20,9 @@ export default class Stats extends React.Component{
     refCallback = element => {
         if (element) {
             let width = ReactDOM.findDOMNode(element).clientWidth
+            console.log(width)
             this.setState(() => ({chartWidth:width}))
+            console.log(this.state.chartWidth)
         }
       };
     render(){
@@ -101,7 +103,7 @@ export default class Stats extends React.Component{
                 percent:90
             }
         ]
-    
+        console.log(this.state.chartWidth)
         return(
             <Row type="flex" justify="center" >
                 <Col 
@@ -118,7 +120,7 @@ export default class Stats extends React.Component{
                             <Chart
                                 type = 'simple'
                                 color = "#8884d8" 
-                                width = {this.state.chartWidth - 50}
+                                width = {600}
                                 data = {simpleChartData}
                             />
                         </Col>
@@ -131,7 +133,7 @@ export default class Stats extends React.Component{
                     <Row gutter={10} type="flex" justify="center" align="middle" >
                         <Col className = "coloumn" xs={18} sm={18} md={14} lg={14} xl={14}>
                             <Chart
-                                width = {this.state.chartWidth}                              
+                                width = {600}                              
                                 type = "dashed"
                                 color = "#A11844"
                                 data = {lineChartsData} 
@@ -139,7 +141,7 @@ export default class Stats extends React.Component{
                         </Col>
                         <Col  span={1}></Col>
                         
-                        <Col className = "coloumn"xs={18} sm={18} md={6} lg={9} xl={9} >
+                        <Col className = "coloumn" xs={18} sm={18} md={6} lg={9} xl={9} >
                             <TagCloud 
                                 data={TagCloudData}
                                 onWordSelect = {(word) => this.wordSelect(word)}
@@ -151,7 +153,7 @@ export default class Stats extends React.Component{
                     <Row type="flex" justify="center" align="middle">
                         <Col xs={18} sm={18} md={14} lg={14} xl={14}>
                             <Chart
-                                width = {this.state.chartWidth}                            
+                                width = {600}                            
                                 color = "#992CA0" 
                                 data = {lineChartsData}
                             />
