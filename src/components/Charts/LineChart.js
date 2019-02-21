@@ -44,17 +44,17 @@ export default class LineChart extends React.Component {
           size: 6
         },
         xaxis: {
-          categories: ['فروردین','اردیبهشت','خرداد'],
+          categories: this.props.xaxis.categories,
           title: {
-            text: 'ماه'
+            text: this.props.xaxis.text
           }
         },
         yaxis: {
           title: {
-            text: 'دما'
+            text: this.props.yaxis.text
           },
-          min: 5,
-          max: 40
+          min: this.props.yaxis.min,
+          max: this.props.yaxis.max
         },
         legend: {
           position: 'top',
@@ -64,12 +64,7 @@ export default class LineChart extends React.Component {
           offsetX: -5
         }
       },
-      series: [
-        {
-          name: "بالا - ۲۰۱۳",
-          data: [28, 29, 33]
-        },
-      ],
+      series:this.props.series
     }
   }
   render(){

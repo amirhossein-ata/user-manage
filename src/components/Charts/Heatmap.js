@@ -1,21 +1,43 @@
 import React from 'react'
-import Heatmap from 'react-heatmap-grid'
+import Chart from "react-apexcharts";
+import '../../styles/stats.css'
 
-export default class HeatmapComponent extends React.Component{
+export default class HeatMap extends React.Component{
+  
     render(){
-        const xLabels = new Array(24).fill(0).map((_, i) => `${i}`);
-        const yLabels = ['Sun', 'Mon', 'Tue'];
-        const data = new Array(yLabels.length)
-        .fill(0)
-        .map(() => new Array(xLabels.length).fill(0).map(() => Math.floor(Math.random() * 100)));
-        
-        return(
-            <Heatmap
-                xLabels={xLabels}
-                yLabels={yLabels}
-                data={data}
-            />
 
+    const options = {
+        chart: {
+            type: 'heatmap',
+        },
+        dataLabels: {
+            enabled: false
+        },
+        colors: ["#008FFB"],
+       
+        series: this.props.series,
+          
+        title: {
+            text: 'نمودار هیتمپ',
+            align: 'center'
+        },
+        grid: {
+                padding: {
+                    left: 50
+                }
+        }
+    }
+        return(
+            <div id="chart">
+                <Chart 
+                    options={options} 
+                    type="heatmap" 
+                    series={options.series}
+                    width={this.props.width}
+                    height={this.props.height}
+
+                />
+            </div>
         )
     }
 }
