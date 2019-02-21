@@ -1,17 +1,24 @@
 import { actionTypes } from '../actions/register-actions'
 
-
-let auth = JSON.parse(localStorage.getItem('persist:buzz')).auth;
-auth = JSON.parse(auth);
+let isAuthenticated = false
+if (localStorage.getItem('persist:buzz')){
+    let auth = JSON.parse(localStorage.getItem('persist:buzz')).auth;
+    auth = JSON.parse(auth) ;
+    isAuthenticated = auth.isAuthenticated
     
+}else{
+    isAuthenticated = false
+}
+
 const initialState = {
-    loggedIn: !!auth.isAuthenticated,
+    loggedIn: !!isAuthenticated,
     registerError: '',
     loginError: ''
 }
 
 export const registerReducer = (state = initialState, action) => {
     switch(action.type) {
+            
         case actionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
