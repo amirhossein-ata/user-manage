@@ -3,7 +3,7 @@ import {login} from '../actions/register-actions'
 import { get_users_list } from '../actions/users-actions'
 import {connect} from 'react-redux'
 import { Row, Col} from 'antd'
-import RawForm from './form'
+import RawForm,{Form} from './form'
 
 class Login extends React.Component{
     state={
@@ -52,14 +52,10 @@ class Login extends React.Component{
                             فرم ورود
                         </h3>
 
-                        <RawForm 
+                        <Form 
                             onSubmit = {this.onSubmit}
                             email = {this.state.credentials.email}
                             password = {this.state.credentials.password}
-                            onSubmitSuccess = {this.onLoginSuccess}
-                            onSubmitFailure = {this.onLoginFailure}
-                            submitError = {this.state.loginError}
-                            submitSuccess = {this.state.loginSuccess}
                             onChange = {this.handle_change}
                         />               
                     </Col>    
