@@ -2,7 +2,7 @@ import React from 'react'
 import {register} from '../actions/register-actions'
 import {connect} from 'react-redux'
 import {Grid, Header} from 'semantic-ui-react'
-import RawForm from './form'
+import {Raw_Form} from './form'
 class Register extends React.Component{
     state={
         credentials:{
@@ -48,14 +48,10 @@ class Register extends React.Component{
                             فرم ثبت نام
                         </Header>
 
-                        <RawForm 
+                        <Raw_Form 
                             onSubmit = {this.onSubmit}
                             email = {this.state.credentials.email}
                             password = {this.state.credentials.password}
-                            onSubmitSuccess = {this.onRegisterSuccess}
-                            onSubmitFailure = {this.onRegisterFailure}
-                            submitError = {this.state.registerError}
-                            submitSuccess = {this.state.registerSuccess}
                             onChange = {this.handle_change}
                         />               
                     </Grid.Column>    
